@@ -3,9 +3,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .chat-conductor-container {
     display: flex;
-    height: 100vh;
+    height: 100vh; /* Asegura que el contenedor ocupe toda la altura de la ventana */
     background-color: #f0f0f0;
 }
 
@@ -58,10 +62,11 @@ body {
 }
 
 .chat-conductor-messages-content {
+    flex: 1; /* Permite que el contenido ocupe todo el espacio disponible */
     overflow-y: auto;
-    max-height: 400px; /* Ajusta esta altura según tus necesidades */
     display: flex;
     flex-direction: column;
+    padding-bottom: 60px; /* Añade espacio suficiente para el input */
 }
 
 .chat-conductor-message-item {
@@ -82,11 +87,11 @@ body {
 }
 
 .chat-conductor-input-container {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
+    position: fixed;
     bottom: 0;
     width: 70%;
+    display: flex;
+    flex-direction: row;
     padding: 10px;
     background-color: #fff;
     border-top: 1px solid #ccc;

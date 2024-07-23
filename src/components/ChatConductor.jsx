@@ -13,11 +13,21 @@ const ChatConductor = () => {
   const url = 'http://localhost:8080';
 
   useEffect(() => {
-    // Fetch senders
-    fetch(url + '/api/chats')
-      .then(response => response.json())
-      .then(data => setSenders(data))
-      .catch(error => console.error('Error fetching senders:', error));
+    const fetchSenders = () => {
+      fetch(url + '/api/chats')
+        .then(response => response.json())
+        .then(data => setSenders(data))
+        .catch(error => console.error('Error fetching senders:', error));
+    };
+  
+  
+    fetchSenders();
+  
+   
+    const intervalId = setInterval(fetchSenders, 1000);
+  
+
+    return () => clearInterval(intervalId);
   }, [url]);
 
   useEffect(() => {
@@ -99,7 +109,7 @@ const ChatConductor = () => {
         <div className="chat-conductor-messages-header">
           <h2>{selectedSender || "Select a chat to view messages"}</h2>
         </div>
-        <div className="chat-conductor-messages-content" style={{ overflowY: 'auto', maxHeight: '400px' }}>
+        <div className="chat-conductor-messages-content" style={{ overflowY: 'auto', maxHeight: '80%' }}>
   {selectedSender ? (
     messages.map((message, index) => (
       <div
